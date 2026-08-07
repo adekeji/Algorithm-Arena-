@@ -1,0 +1,38 @@
+name: Build and Deploy Python Backend to Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+
+env:
+  AZURE_WEBAPP_NAME: xprize-backend-api  # Update this to your Web App name
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push container image
+      uses: docker/build-push-action@v3
+      with:
+        context: ./backend
+        push: true
+        tags: ghcr.io/${{ github.repository }}/backend:latest
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: 'ghcr.io/${{ github.repository }}/backend:latest'
