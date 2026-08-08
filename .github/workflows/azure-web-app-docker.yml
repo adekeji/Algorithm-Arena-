@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: xprize-backend-uopeople
+  AZURE_WEBAPP_NAME: algo-arena-backend
 
 jobs:
   build-and-deploy:
