@@ -29,11 +29,11 @@ jobs:
       with:
         context: ./frontend
         push: true
-        tags: ghcr.io/adekeji/algorithm-arena-/frontend:latest
+        tags: ghcr.io/adekeji/algorithm-arena/frontend:latest
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
-        images: 'ghcr.io/adekeji/algorithm-arena-/frontend:latest'
+        images: 'ghcr.io/adekeji/algorithm-arena/frontend:latest'
