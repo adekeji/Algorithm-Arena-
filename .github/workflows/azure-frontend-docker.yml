@@ -33,6 +33,11 @@ jobs:
         context: ./frontend
         push: true
         tags: ghcr.io/adekeji/algorithm-arena-xp/frontend:latest
+        build-args: |
+          NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_API_URL=https://algo-arena-backend.azurewebsites.net
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
