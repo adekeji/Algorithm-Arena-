@@ -1,15 +1,15 @@
-name: Build and Deploy Python Backend to Azure Web App
+name: Build and Deploy Next.js Frontend to Azure Web App
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'backend/**'
+      - 'frontend/**'
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: xprize-backend-uopeople
+  AZURE_WEBAPP_NAME: xprize-frontend-uopeople
 
 jobs:
   build-and-deploy:
@@ -27,13 +27,13 @@ jobs:
     - name: Build and push container image
       uses: docker/build-push-action@v3
       with:
-        context: ./backend
+        context: ./frontend
         push: true
-        tags: ghcr.io/${{ github.repository }}/backend:latest
+        tags: ghcr.io/${{ github.repository }}/frontend:latest
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: 'ghcr.io/${{ github.repository }}/backend:latest'
+        publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
+        images: 'ghcr.io/${{ github.repository }}/frontend:latest'
