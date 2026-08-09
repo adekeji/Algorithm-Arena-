@@ -30,7 +30,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} dark`} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen font-sans antialiased bg-[#05060a] text-[#e7e9f5]">
+        <div className="aurora" />
         {children}
       </body>
     </html>
