@@ -207,7 +207,7 @@ export function BenchmarkView({ algorithms }: BenchmarkViewProps) {
                     color: '#fff',
                   }}
                   labelFormatter={(v) => `n = ${Number(v).toLocaleString()}`}
-                  formatter={(value: number, name: string) => [`${value} ms`, name]}
+                  formatter={(value: any, name: any) => [`${value} ms`, name]}
                 />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.7)' }} />
                 {results.map((r) => (
