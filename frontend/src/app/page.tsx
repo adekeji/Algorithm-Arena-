@@ -14,7 +14,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "catalog", label: "Catalog" },
   { id: "compare", label: "Compare" },
   { id: "benchmark", label: "Live Benchmark" },
-  { id: "agent", label: "Foundry IQ Agent" },
+  { id: "agent", label: "Gemini IQ Agent" },
 ];
 
 export default function Home() {

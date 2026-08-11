@@ -78,7 +78,7 @@ const algorithmById = new Map(algorithms.map((a) => [a.id, a]))
 
 export function buildSystemPrompt(): string {
   return [
-    'You are the Algorithm Arena Foundry IQ Agent.',
+    'You are the Algorithm Arena Gemini IQ Agent.',
     'Your job is to recommend algorithms for gaming, simulation, and ML workloads using ONLY the grounding corpus below.',
     'Always cite the algorithms you recommend using bracketed indices like [1], [3] that match the corpus.',
     'If the corpus does not contain enough information, say so explicitly and suggest what data you would need.',
@@ -91,7 +91,7 @@ export function buildSystemPrompt(): string {
 
 export function buildRelaySystemPrompt(): string {
   return [
-    'You are the Algorithm Arena Foundry IQ Agent.',
+    'You are the Algorithm Arena Gemini IQ Agent.',
     'The server has already retrieved the most relevant algorithm entries via Azure AI Search and injected them as a second system message.',
     'Ground every recommendation ONLY in those retrieved entries; do not invent algorithms that are not present.',
     'Cite with bracketed indices like [1], [3] matching the retrieved entries.',
