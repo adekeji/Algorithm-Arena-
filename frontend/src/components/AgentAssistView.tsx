@@ -4,11 +4,10 @@ import { useMemo, useState } from 'react'
 import { GlassPanel } from './Glass'
 import {
   buildSystemPrompt,
-  invokeFoundryIq,
-  type FoundryChatMessage,
-  type FoundryCitation,
-  type FoundryIqConfig,
-} from '../services/foundryIq'
+  invokeGeminiAgent,
+  type GeminiChatMessage,
+  type GeminiCitation,
+} from '../services/geminiAgent'
 
 type ChatRole = 'user' | 'assistant'
 
@@ -16,7 +15,7 @@ interface ChatMessage {
   id: string
   role: ChatRole
   text: string
-  citations?: FoundryCitation[]
+  citations?: GeminiCitation[]
   reasoning?: string[]
 }
 
@@ -27,13 +26,6 @@ const starterPrompts = [
 ]
 
 export function AgentAssistView() {
-  const [cfg] = useState<FoundryIqConfig>({
-    endpointUrl: '/api/chat',
-    deployment: 'gemini',
-    apiKey: '',
-    authMode: 'relay',
-    apiVersion: '',
-  })
   const [draft, setDraft] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -61,7 +53,7 @@ export function AgentAssistView() {
 
     try {
       const systemContent = buildSystemPrompt()
-      const chatHistory: FoundryChatMessage[] = [
+      const chatHistory: GeminiChatMessage[] = [
         { role: 'system', content: systemContent },
         ...nextHistory.map((m) => ({
           role: m.role as 'user' | 'assistant',
@@ -69,7 +61,7 @@ export function AgentAssistView() {
         })),
       ]
 
-      const reply = await invokeFoundryIq(cfg, chatHistory)
+      const reply = await invokeGeminiAgent(chatHistory)
 
       setMessages((prev) => [
         ...prev,

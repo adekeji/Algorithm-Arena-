@@ -44,16 +44,8 @@ export async function POST(req: NextRequest) {
 
     const text = response.text || "";
 
-    // Return in the exact format the frontend expects (mimicking OpenAI's format for compatibility)
-    return NextResponse.json({
-      choices: [
-        {
-          message: {
-            content: text,
-          },
-        },
-      ],
-    });
+    // Return clean JSON response
+    return NextResponse.json({ text });
 
   } catch (error: any) {
     console.error("Gemini API Error:", error);
