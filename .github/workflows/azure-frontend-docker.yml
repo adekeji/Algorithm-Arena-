@@ -32,7 +32,7 @@ jobs:
       with:
         context: ./frontend
         push: true
-        tags: ghcr.io/adekeji/algorithm-arena-xp/frontend:latest
+        tags: ghcr.io/adekeji/algorithm-arena-xp/frontend:${{ github.sha }}
         build-args: |
           NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
@@ -44,4 +44,4 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
-        images: 'ghcr.io/adekeji/algorithm-arena-xp/frontend:latest'
+        images: 'ghcr.io/adekeji/algorithm-arena-xp/frontend:${{ github.sha }}'
