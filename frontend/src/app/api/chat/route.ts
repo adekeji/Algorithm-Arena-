@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     // Call Gemini Model
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash", // Good default fast model
+      model: "gemini-1.5-pro-latest", // User requested the latest model
       contents,
       config: {
         systemInstruction,
